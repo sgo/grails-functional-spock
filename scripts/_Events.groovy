@@ -14,18 +14,18 @@
 * limitations under the License.
 */
 
-class FunctionalSpockGrailsPlugin {
-    def version = "0.1"
-    def grailsVersion = "1.3.0 > *"
-    def dependsOn = [:]
-    def pluginExcludes = [
-            "grails-app/**",
-            "web-app"
-    ]
+def loaderFactory = {
+    try {
+        classLoader.loadClass('grails.plugin.functional.spock.SpecTestTypeLoader').newInstance(binding)
+    } catch(ClassNotFoundException e) {
+        null
+    }
+}
 
-    def author = "Sebastian Gozin"
-    def authorEmail = "sebastian.gozin@gmail.com"
-    def title = "Spock Functional Plugin - spockframework.org"
-    def description = 'Write Grails functional tests with Spock'
-    def documentation = 'http://grails.org/plugin/spock'
+eventAllTestsStart = {
+    loaderFactory()?.registerFunctionalSpecSupport()
+}
+
+eventPackagePluginsEnd = {
+    loaderFactory()?.registerFunctionalSpecSupport()
 }
