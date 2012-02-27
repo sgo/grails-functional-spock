@@ -25,18 +25,17 @@ grails.project.dependency.resolution = {
     repositories {
         grailsHome()
         grailsCentral()
-        mavenRepo 'http://nexus.thinkerit.be/content/groups/public'
     }
 
     plugins {
-        compile ":spock:latest.integration"
-        compile ":release:latest.integration", {export = false}
-        compile ":svn:latest.integration", {export = false}
+        build ":spock:0.5-groovy-1.7"
+        build ":release:latest.integration", {export = false}
+        build ":svn:latest.integration", {export = false}
     }
 
     dependencies {
         // here because the release/svn plugins can't be bothered to resolve their own dependencies properly
-        compile("org.tmatesoft.svnkit:svnkit:latest.integration") {
+        build("org.tmatesoft.svnkit:svnkit:latest.integration") {
             excludes "jna", "trilead-ssh2", "sqljet"
             export = false
         }
