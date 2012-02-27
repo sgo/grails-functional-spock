@@ -27,5 +27,5 @@ class FunctionalSpockGrailsPlugin {
     def authorEmail = "sebastian.gozin@gmail.com"
     def title = "Spock Functional Plugin - spockframework.org"
     def description = 'Write Grails functional tests with Spock'
-    def documentation = 'http://grails.org/plugin/spock'
+    def documentation = 'http://grails.org/plugin/functional-spock'
 }

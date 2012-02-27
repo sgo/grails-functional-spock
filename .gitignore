@@ -4,8 +4,9 @@
 *.launch
 plugin.xml
 stacktrace.log
-web-app/WEB-INF/tld/*.tld
-web-app/WEB-INF/*.xml
+web-app
+grails-app/i18n
+grails-app/conf/UrlMappings.groovy
 /docs
 *.zip
 *.zip*
