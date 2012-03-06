@@ -1,3 +1,4 @@
+package grails.plugin.functional.spock
 /*
 * Copyright 2009 the original author or authors.
 *
@@ -14,9 +15,6 @@
 * limitations under the License.
 */
 
-package unit.grails.plugin.functional.spock
-
-import grails.plugin.functional.spock.SpecTestTypeLoader
 import grails.plugin.spock.test.GrailsSpecTestType
 import spock.lang.Specification
 
@@ -25,8 +23,8 @@ class SpecTestTypeLoaderSpec extends Specification {
     private SpecTestTypeLoader loader
 
     def setup() {
-        binding = [variables:[:]]
-        loader = new SpecTestTypeLoader(binding)
+        binding = [variables: [:]]
+        loader = new SpecTestTypeLoader(binding, GrailsSpecTestType)
     }
 
     def "given binding defines no functionalTests variable then skip execution"() {
@@ -36,7 +34,7 @@ class SpecTestTypeLoaderSpec extends Specification {
 
     def "when functionalTests do not define a spec type then add it"() {
         given:
-        binding.variables = [functionalTests:[]]
+        binding.variables = [functionalTests: []]
 
         when:
         loader.registerFunctionalSpecSupport()
@@ -52,7 +50,7 @@ class SpecTestTypeLoaderSpec extends Specification {
 
     def "if type already registered skip"() {
         given:
-        binding.variables = [functionalTests:[]]
+        binding.variables = [functionalTests: []]
 
         when:
         loader.registerFunctionalSpecSupport()

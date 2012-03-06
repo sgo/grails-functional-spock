@@ -16,13 +16,13 @@
 
 package grails.plugin.functional.spock
 
-import grails.plugin.spock.test.GrailsSpecTestType
-
 class SpecTestTypeLoader {
     private binding
+    private specType
 
-    SpecTestTypeLoader(binding) {
+    SpecTestTypeLoader(binding, specType) {
         this.binding = binding
+        this.specType = specType
     }
 
     void registerFunctionalSpecSupport() {
@@ -38,10 +38,10 @@ class SpecTestTypeLoader {
     }
 
     boolean isShouldRegisterSpecSupport() {
-        return !variables.functionalTests.any {it in GrailsSpecTestType}
+        return !variables.functionalTests.any {it in specType}
     }
 
     private addFunctionalSpecSupport() {
-        variables.functionalTests << new GrailsSpecTestType('spock', 'functional')
+        variables.functionalTests << specType.newInstance('spock', 'functional')
     }
 }

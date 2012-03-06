@@ -27,19 +27,15 @@ grails.project.dependency.resolution = {
     repositories {
         grailsHome()
         grailsCentral()
+        grailsRepo "http://grails.org/plugins"
+        mavenCentral()
     }
 
     plugins {
-        build ":spock:0.5-groovy-1.7"
-        build ":release:latest.integration", {export = false}
-        build ":svn:latest.integration", {export = false}
+        build ":release:2.0.2", {export = false}
     }
 
     dependencies {
-        // here because the release/svn plugins can't be bothered to resolve their own dependencies properly
-        build("org.tmatesoft.svnkit:svnkit:latest.integration") {
-            excludes "jna", "trilead-ssh2", "sqljet"
-            export = false
-        }
+        compile("org.spockframework:spock-grails-support:0.6-groovy-1.8")
     }
 }

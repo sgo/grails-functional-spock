@@ -14,18 +14,22 @@
 * limitations under the License.
 */
 
-def loaderFactory = {
+def loadSpecTestType = {-> classLoader.loadClass('grails.plugin.spock.test.GrailsSpecTestType') }
+def loaderFactory = {->
+    def doLoad = {classLoader.loadClass('grails.plugin.functional.spock.SpecTestTypeLoader').newInstance(binding, loadSpecTestType())}
     try {
-        classLoader.loadClass('grails.plugin.functional.spock.SpecTestTypeLoader').newInstance(binding)
-    } catch(ClassNotFoundException e) {
-        null
+        doLoad()
+    } catch (ClassNotFoundException e) {
+        includeTargets << grailsScript("_GrailsCompile")
+        compile()
+        doLoad()
     }
 }
 
 eventAllTestsStart = {
-    loaderFactory()?.registerFunctionalSpecSupport()
+    loaderFactory().registerFunctionalSpecSupport()
 }
 
 eventPackagePluginsEnd = {
-    loaderFactory()?.registerFunctionalSpecSupport()
+    loaderFactory().registerFunctionalSpecSupport()
 }

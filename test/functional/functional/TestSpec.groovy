@@ -1,4 +1,4 @@
-package functional.grails.plugin.functional.spock
+package functional
 
 import spock.lang.Specification
 
