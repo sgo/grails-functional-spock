@@ -32,10 +32,14 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        build ":release:2.0.2", {export = false}
+        build(":tomcat:$grailsVersion",
+                ":release:2.2.1",
+                ":rest-client-builder:1.0.3") {
+            export = false
+        }
     }
 
     dependencies {
-        compile("org.spockframework:spock-grails-support:0.6-groovy-1.8")
+        compile "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 }

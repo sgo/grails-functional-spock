@@ -9,7 +9,7 @@ Installation
 
 For grails-2 add the following line to the plugins section of your BuildConfig.groovy
 
-    compile ":functional-spock:0.6"
+    compile ":functional-spock:0.7"
 
 For grails-1.3 add the following line to the plugins section of your BuildConfig.groovy
 
